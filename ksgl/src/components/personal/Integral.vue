@@ -26,7 +26,23 @@
 
               <el-col :span="8" :offset="1">
                 <el-tabs value="first">
-                  <el-tab-pane label="积分充值" name="first"></el-tab-pane>
+                  <el-tab-pane label="积分充值" name="first">
+                    <el-form
+                      :model="ruleForm"
+                      status-icon
+                      :rules="rules"
+                      ref="ruleForm"
+                      label-width="100px"
+                      class="demo-ruleForm"
+                    >
+                      <el-form-item label="充值金额" prop="money">
+                        <el-input v-model.number="ruleForm.money"></el-input>
+                      </el-form-item>
+                      <el-form-item>
+                        <el-button type="primary" @click="submitForm('ruleForm')">充值</el-button>
+                      </el-form-item>
+                    </el-form>
+                  </el-tab-pane>
                 </el-tabs>
               </el-col>
             </el-row>
@@ -40,7 +56,29 @@
 <script>
 export default {
   data() {
+    var checkMoney = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("充值金额不能为空！"));
+      }
+      setTimeout(() => {
+        if (!Number.isInteger(value)) {
+          callback(new Error("请输入数字"));
+        } else {
+          if (value < 0) {
+            callback(new Error("充值金额不能少于0元！"));
+          } else {
+            callback();
+          }
+        }
+      }, 1000);
+    };
     return {
+      rules: {
+        money: [{ validator: checkMoney, trigger: "blur" }]
+      },
+      ruleForm: {
+        money: 0
+      },
       orders: [
         {
           id: "20190812001",
@@ -61,6 +99,16 @@ export default {
   methods: {
     remove(id) {
       console.log(id);
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     }
   }
 };

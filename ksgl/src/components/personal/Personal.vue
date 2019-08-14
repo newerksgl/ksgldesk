@@ -2,10 +2,7 @@
   <div>
     <el-row class="tac">
       <el-col :span="3" :offset="3">
-        <el-menu
-          router
-          default-active="2"
-          class="el-menu-vertical-demo">
+        <el-menu router default-active="2" class="el-menu-vertical-demo">
           <el-menu-item index="shouye">
             <template slot="title">
               <i class="el-icon-location"></i>
@@ -26,7 +23,7 @@
           </el-menu-item>
         </el-menu>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="14">
         <router-view></router-view>
       </el-col>
     </el-row>
