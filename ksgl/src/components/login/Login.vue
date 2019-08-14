@@ -95,11 +95,11 @@ export default {
                 PubSub.publish("search", res.data);
                 this.$router.push("shouye");
               } else {
-                alert("用户名或密码错误!");
+                this.$message.error("用户名或密码错误");
               }
             })
             .catch(err => {
-              alert("用户名或密码错误!");
+              this.$message.error("用户名或密码错误");
             });
         } else {
           console.log("error submit!!");

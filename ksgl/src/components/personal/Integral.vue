@@ -98,11 +98,60 @@ export default {
   components: {},
   methods: {
     remove(id) {
-      console.log("删除编号：" + id);
+      this.$confirm("此操作将永久删除该订单, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+          console.log("删除编号：" + id);
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
-    submitForm(money) {
-      if (0 < money) {
-        console.log("充值金额：" + money);
+    submitForm(value) {
+      if (0 < value) {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        var millisecond = date.getMilliseconds();
+        if (month >= 1 && month <= 9) {
+          month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+          strDate = "0" + strDate;
+        }
+        var id = year + month + strDate + hour + minute + second + millisecond;
+        var time = year + month + strDate + hour + minute;
+        var status = "已付款";
+        this.orders.push({
+          id: id,
+          time: time,
+          money: value,
+          status: status
+        });
+        console.log(
+          "编号：" +
+            id +
+            "充值金额：" +
+            value +
+            "时间：" +
+            time +
+            "状态：" +
+            status
+        );
       }
     }
   }

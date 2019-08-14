@@ -115,11 +115,15 @@ export default {
           this.request
             .post("Users/insert", user)
             .then(res => {
-              alert("注册成功!立即登录!");
+              this.$message({
+                message: "注册成功",
+                type: "success"
+              });
               this.$router.push("login");
             })
             .catch(err => {
-              alert("登录失败");
+              // alert("登录失败");
+              this.$message.error("登录失败");
             });
         } else {
           console.log("error submit!!");
