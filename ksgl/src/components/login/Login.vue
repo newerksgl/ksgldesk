@@ -87,7 +87,11 @@ export default {
             .then(res => {
               console.log(res.data);
               if (res.data != "") {
-                alert("登录成功");
+                // alert("登录成功");
+                this.$message({
+                  message: "登录成功",
+                  type: "success"
+                });
                 PubSub.publish("search", res.data);
                 this.$router.push("shouye");
               } else {

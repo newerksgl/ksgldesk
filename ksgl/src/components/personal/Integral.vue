@@ -39,7 +39,7 @@
                         <el-input v-model.number="ruleForm.money"></el-input>
                       </el-form-item>
                       <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">充值</el-button>
+                        <el-button type="primary" @click="submitForm(ruleForm.money)">充值</el-button>
                       </el-form-item>
                     </el-form>
                   </el-tab-pane>
@@ -58,14 +58,14 @@ export default {
   data() {
     var checkMoney = (rule, value, callback) => {
       if (!value) {
-        return callback(new Error("充值金额不能为空！"));
+        return callback(new Error("充值金额不能为0！"));
       }
       setTimeout(() => {
         if (!Number.isInteger(value)) {
           callback(new Error("请输入数字"));
         } else {
           if (value < 0) {
-            callback(new Error("充值金额不能少于0元！"));
+            callback(new Error("充值金额不能少于1元！"));
           } else {
             callback();
           }
@@ -84,13 +84,13 @@ export default {
           id: "20190812001",
           rechargeAmount: "1",
           time: "2016-05-03",
-          status: "待付款"
+          status: "已付款"
         },
         {
           id: "20190812002",
           rechargeAmount: "1",
           time: "2016-05-03",
-          status: "待付款"
+          status: "已付款"
         }
       ]
     };
@@ -98,17 +98,12 @@ export default {
   components: {},
   methods: {
     remove(id) {
-      console.log(id);
+      console.log("删除编号：" + id);
     },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+    submitForm(money) {
+      if (0 < money) {
+        console.log("充值金额：" + money);
+      }
     }
   }
 };
