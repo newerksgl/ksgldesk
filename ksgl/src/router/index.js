@@ -1,21 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-//课程模块
-import Course from "../components/courseManagement/Course.vue";
-import FenLei from "../components/courseManagement/FenLei.vue";
-import Coursemng from "../components/courseManagement/Coursemng.vue";
-import MoKuaigl from "../components/courseManagement/MoKuaigl.vue";
-//证书模块
-import Ccie from '../components/ccie/Ccie.vue'
-//用户模块
-import User from '../components/linemodule/User.vue'
-import UserManagement from '../components/linemodule/UserManagement.vue'
-import RoleManagement from '../components/linemodule/RoleManagement.vue'
-import Moduledesign from '../components/linemodule/Moduledesign.vue'
-import ModelManagement from '../components/linemodule/ModelManagement.vue'
-
-
 import Login from "../components/login/Login.vue";
 import ShouYe from '../components/shouye/ShouYe.vue'
 import Register from '../components/register/Register.vue'
@@ -38,34 +22,6 @@ export default new Router({
       name: 'shouye',
       component: ShouYe
     }, {
-      path: '/user',
-      name: 'user',
-      component: User,
-      children: [
-        {
-          path: '/usermanagement',
-          name: 'usermanagement',
-          component: UserManagement
-        },
-        {
-          path: '/rolemanagement',
-          name: 'rolemanagement',
-          component: RoleManagement
-        },
-        {
-          path: '/moduledesign',
-          name: 'moduledesign',
-          component: Moduledesign
-        },
-        {
-          path: '/modelmanagement',
-          name: 'modelmanagement',
-          component: ModelManagement
-        }
-
-      ]
-    },
-    {
       path: '/register',
       name: 'register',
       component: Register
@@ -84,37 +40,7 @@ export default new Router({
           name: 'integral',
           component: Integral
         }
-
       ]
-    },
-
-    {
-      path: '/course',
-      name: 'course',
-      component: Course,
-      children: [
-        {
-          path: '/classification',
-          name: 'classification',
-          component: FenLei
-        },
-        {
-          path: '/coursemng',
-          name: 'coursemng',
-          component: Coursemng
-        },
-        {
-          path: '/moKuaigl',
-          name: 'moKuaigl',
-          component: MoKuaigl
-        }
-
-      ]
-    },
-    {
-      path: '/ccie',
-      name: 'ccie',
-      component: Ccie
     }
   ]
 })
