@@ -6,7 +6,9 @@ import Register from '../components/register/Register.vue'
 import Personal from '../components/personal/Personal.vue'
 import Privacy from '../components/personal/Privacy.vue'
 import Integral from '../components/personal/Integral.vue'
+// 考试
 import KaoShi from '../components/kaoshi/KaoShi.vue'
+import Kcgl from '../components/kaoshi/Kcgl.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +28,13 @@ export default new Router({
       path: '/kaoshi',
       name: 'kaoshi',
       component: KaoShi,
+      children:[
+        {
+          path:'/kcgl',
+          name:'kcgl',
+          component:Kcgl
+        }
+      ]
     }, {
       path: '/register',
       name: 'register',

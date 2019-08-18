@@ -3,12 +3,12 @@
     <el-row>
       <el-col :span="6">
         <el-menu
-        router:default-active="$router.path"
+        router default-active="$router.path"
         class="el-menu-vertical-demo"
         text-color="#000"
         active-text-color="blue"
         >
-          <el-menu-item index="1">
+          <el-menu-item index="kcgl">
             <i class="el-icon-menu"></i>
             <span slot="title">考场列表</span>
           </el-menu-item>
