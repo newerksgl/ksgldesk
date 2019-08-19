@@ -23,7 +23,7 @@
                     </el-col>
                     <el-col :span="10">
                         <el-form-item label="考场状态：" prop="statetest">
-                            <el-radio-group v-model="form.stateTest">
+                            <el-radio-group v-model="form.statetest">
                                 <el-radio label="开通">开通</el-radio>
                                 <el-radio label="未开通">未开通</el-radio>
                             </el-radio-group>
@@ -70,6 +70,8 @@
                     <el-table-column prop="id" label="ID"></el-table-column>
                     <el-table-column prop="name" label="名称"></el-table-column>
                     <el-table-column prop="number" label="开通人数"></el-table-column>
+                    <el-table-column prop="s.name" label="科目"></el-table-column>
+                    <el-table-column prop="r.name" label="地区"></el-table-column>
                 </el-table>
             </el-col>
         </el-row>
@@ -82,15 +84,21 @@ export default {
             tableData:[
                 {
                     id:1,
-                    sid:1,
-                    reid:1,
                     number:12,
                     stateTest:'开通',
-                    name:'长沙疯儿幼儿园'
+                    name:'长沙疯儿幼儿园',
+                    s:{
+                        sid:1,
+                        name:"无聊的科目",
+                        image:"看不见"
+                    },
+                    r:{
+                        reid:1,
+                        name:"无聊小镇",
+                    }
                 }
             ],
             form:{
-                id:null,
                 sid:null,
                 reid:null,
                 number:null,
@@ -147,8 +155,9 @@ export default {
         },
         submitForm(){
             this.form.name= '%'+this.form.name+'%';
+            console.log(this.form.statetest);
             this.request
-            .post("examinations/find",this.form)
+            .post("examinationsSubjectRegionPage/find",this.form)
             .then(res => {
                 console.log(res.data);
                 this.tableData=res.data;
