@@ -67,6 +67,30 @@
         <el-row>
             <el-col :span="24">
                 <el-table :data="tableData.data" style="width: 100%" stripe>
+                    <el-table-column type="expand">
+                        <template slot-scope="props">
+                            <el-form label-position="left" inline class="demo-table-expand">
+                            <el-form-item label="ID">
+                                <span>{{ props.row.id }}</span>
+                            </el-form-item>
+                            <el-form-item label="名称">
+                                <span>{{ props.row.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="科目">
+                                <span>{{ props.row.s.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="地区">
+                                <span>{{ props.row.r.name }}</span>
+                            </el-form-item>
+                            <el-form-item label="邮政编码">
+                                <span>{{ props.row.r.areaCode }}</span>
+                            </el-form-item>
+                            <el-form-item >
+                                <el-button type="primary" @click="open(props.row.id)">开通{{user}}</el-button>
+                            </el-form-item>
+                            </el-form>
+                        </template>
+                    </el-table-column>
                     <el-table-column prop="id" label="ID"></el-table-column>
                     <el-table-column prop="name" label="名称"></el-table-column>
                     <el-table-column prop="number" label="开通人数"></el-table-column>
@@ -95,6 +119,7 @@ export default {
                     r:{
                         reid:1,
                         name:"无聊小镇",
+                        areaCode:50000
                     }
                 }
             ],
@@ -119,7 +144,8 @@ export default {
                 name: '双皮奶',
                 sid: '2'
             }],
-            dialogFormVisible: false
+            dialogFormVisible: false,
+            user:null
         }
     },
     methods:{
@@ -154,14 +180,12 @@ export default {
             });
         },
         submitForm(){
+            console.log(this.user);
             this.form.name= '%'+this.form.name+'%';
-            console.log(this.form.statetest);
             this.request
             .post("examinationsSubjectRegionPage/find",this.form)
             .then(res => {
-                console.log(res.data);
                 this.tableData=res.data;
-                console.log(this.tableData);
                 this.form.name=this.form.name.replace('%','');
                 this.form.name=this.form.name.replace('%','');
             })
@@ -173,15 +197,51 @@ export default {
                     duration: 1000
                 });
             });
+        },
+        open(id){
+            this.request
+            .post("examinations/kaiTong",{id:id})
+            .then(res => {
+                if(res.data==1){
+                    this.$message({
+                        message: "开通成功",
+                        type: "success"
+                    });
+                }
+            })
+            .catch(err => {
+                this.$message({
+                    showClose: true,
+                    message: '请求失败',
+                    type: 'error',
+                    duration: 1000
+                });
+            });
+            this.submitForm();
         }
     },
     mounted(){
         this.getRegionData();
         this.getSubjectData();
         this.submitForm();
+        PubSub.subscribe("search",(msg,user)=>{
+            this.user = user
+        })
     },
   components: {}
 }
 </script>
 <style>
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
 </style>

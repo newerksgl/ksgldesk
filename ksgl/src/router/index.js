@@ -9,6 +9,7 @@ import Integral from '../components/personal/Integral.vue'
 // 考试
 import KaoShi from '../components/kaoshi/KaoShi.vue'
 import Kcgl from '../components/kaoshi/Kcgl.vue'
+import Stgl from '../components/kaoshi/Stgl.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -33,7 +34,12 @@ export default new Router({
           path:'/kcgl',
           name:'kcgl',
           component:Kcgl
-        }
+        },
+        {
+          path:'/stgl',
+          name:'stgl',
+          component:Stgl
+        },
       ]
     }, {
       path: '/register',

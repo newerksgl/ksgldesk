@@ -12,7 +12,7 @@
             <i class="el-icon-menu"></i>
             <span slot="title">考场列表</span>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="stgl">
             <i class="el-icon-setting"></i>
             <span slot="title">试题管理</span>
           </el-menu-item>
