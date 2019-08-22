@@ -85,8 +85,8 @@
                             <el-form-item label="邮政编码">
                                 <span>{{ props.row.r.areaCode }}</span>
                             </el-form-item>
-                            <el-form-item >
-                                <el-button type="primary" @click="open(props.row.id)">开通{{user}}</el-button>
+                            <el-form-item v-if="props.row.statetest=='未开通'" >
+                                <el-button type="primary" @click="open(props.row.id)">开通</el-button>
                             </el-form-item>
                             </el-form>
                         </template>
@@ -102,6 +102,7 @@
     </div>
 </template>
 <script>
+import PubSub from "pubsub-js";
 export default {
     data(){
         return{
@@ -109,7 +110,7 @@ export default {
                 {
                     id:1,
                     number:12,
-                    stateTest:'开通',
+                    statetest:'开通',
                     name:'长沙疯儿幼儿园',
                     s:{
                         sid:1,
