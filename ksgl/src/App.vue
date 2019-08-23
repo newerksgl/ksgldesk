@@ -79,6 +79,7 @@ export default {
     // 订阅搜索的消息
     PubSub.subscribe("search", (msg, user) => {
       this.user = user;
+      PubSub.publish("search", user);
     });
   },
   methods: {

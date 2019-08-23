@@ -187,13 +187,13 @@ export default {
             });
         },
         submitForm(){
-            this.form.name= '%'+this.form.questionStem+'%';
+            this.form.questionStem= '%'+this.form.questionStem+'%';
             this.request
             .post("exasSubjectQuestion/find",this.form)
             .then(res => {
                 this.tableData=res.data.data;
-                this.form.name=this.form.questionStem.replace('%','');
-                this.form.name=this.form.questionStem.replace('%','');
+                this.form.questionStem=this.form.questionStem.replace('%','');
+                this.form.questionStem=this.form.questionStem.replace('%','');
             })
             .catch(err => {
                 this.$message({

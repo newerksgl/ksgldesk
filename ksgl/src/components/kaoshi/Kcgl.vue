@@ -9,7 +9,7 @@
                 </el-breadcrumb>
             </el-col>
         </el-row>
-        <el-row><el-col>&nbsp;</el-col></el-row>
+        <el-row><el-col>&nbsp;{{role}}</el-col></el-row>
         <el-form
           :model="form"
           label-width="100px">
@@ -74,7 +74,7 @@
                                 <span>{{ props.row.id }}</span>
                             </el-form-item>
                             <el-form-item label="名称">
-                                <span>{{ props.row.name }}</span>
+                                <a href="/#/ks" @click="goks(props.row)">{{ props.row.name }}</a>
                             </el-form-item>
                             <el-form-item label="科目">
                                 <span>{{ props.row.s.name }}</span>
@@ -85,7 +85,7 @@
                             <el-form-item label="邮政编码">
                                 <span>{{ props.row.r.areaCode }}</span>
                             </el-form-item>
-                            <el-form-item v-if="props.row.statetest=='未开通'" >
+                            <el-form-item v-if="props.row.statetest=='未开通'&&role==null" >
                                 <el-button type="primary" @click="open(props.row.id)">开通</el-button>
                             </el-form-item>
                             </el-form>
@@ -146,7 +146,9 @@ export default {
                 sid: '2'
             }],
             dialogFormVisible: false,
-            user:null
+            user:null,
+            role:null
+
         }
     },
     methods:{
@@ -181,7 +183,6 @@ export default {
             });
         },
         submitForm(){
-            console.log(this.user);
             this.form.name= '%'+this.form.name+'%';
             this.request
             .post("examinationsSubjectRegionPage/find",this.form)
@@ -219,15 +220,36 @@ export default {
                 });
             });
             this.submitForm();
+        },
+        goks(ex){
+            PubSub.publish("ex", ex);
+        },
+        getRole(rid){
+            this.request
+            .post("Userrole/selectById",{rid:rid})
+            .then(res => {
+                this.role=res.data;
+            })
+            .catch(err => {
+                this.$message({
+                    showClose: true,
+                    message: '请求失败',
+                    type: 'error',
+                    duration: 1000
+                });
+            });
         }
     },
     mounted(){
         this.getRegionData();
         this.getSubjectData();
         this.submitForm();
-        PubSub.subscribe("search",(msg,user)=>{
-            this.user = user
-        })
+        PubSub.subscribe("search", (msg, user) => {
+            this.user = user;
+            if(this.user!=null){
+                this.getRole(this.user.rid);
+            }
+        });
     },
   components: {}
 }
