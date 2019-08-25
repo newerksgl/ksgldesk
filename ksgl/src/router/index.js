@@ -11,6 +11,7 @@ import KaoShi from '../components/kaoshi/KaoShi.vue'
 import Kcgl from '../components/kaoshi/Kcgl.vue'
 import Stgl from '../components/kaoshi/Stgl.vue'
 import Ks from '../components/kaoshi/Ks.vue'
+import Moni from '../components/kaoshi/Moni.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +47,11 @@ export default new Router({
           name:'ks',
           component:Ks
         },
+        {
+          path:'/moni',
+          name:'moni',
+          component:Moni
+        }
       ]
     }, {
       path: '/register',
