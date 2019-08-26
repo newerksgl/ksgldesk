@@ -23,7 +23,7 @@
                 <a href="/#/moni" @click="setEx()">模拟考试</a>
             </el-col>
             <el-col :span="8">
-                <a href="">正式考试</a>
+                <a href="/#/zhengshi" @click="setEx()">正式考试</a>
             </el-col>
         </el-row>
     </div>

@@ -12,6 +12,7 @@ import Kcgl from '../components/kaoshi/Kcgl.vue'
 import Stgl from '../components/kaoshi/Stgl.vue'
 import Ks from '../components/kaoshi/Ks.vue'
 import Moni from '../components/kaoshi/Moni.vue'
+import ZhengShi from '../components/kaoshi/ZhengShi.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +52,11 @@ export default new Router({
           path:'/moni',
           name:'moni',
           component:Moni
+        },
+        {
+          path:'/zhengshi',
+          name:'zhengshi',
+          component:ZhengShi
         }
       ]
     }, {
