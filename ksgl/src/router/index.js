@@ -13,6 +13,9 @@ import Stgl from '../components/kaoshi/Stgl.vue'
 import Ks from '../components/kaoshi/Ks.vue'
 import Moni from '../components/kaoshi/Moni.vue'
 import ZhengShi from '../components/kaoshi/ZhengShi.vue'
+//课程
+import KeCheng from '../components/kecheng/KeCheng.vue'
+import Kclb from '../components/kecheng/Kclb.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -63,6 +66,17 @@ export default new Router({
       path: '/register',
       name: 'register',
       component: Register
+    }, {
+      path: '/kecheng',
+      name: 'kecheng',
+      component: KeCheng,
+      children:[
+        {
+          path: '/kclb',
+          name: 'kclb',
+          component: Kclb
+        }
+      ]
     }, {
       path: '/personal',
       name: 'personal',

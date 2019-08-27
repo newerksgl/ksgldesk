@@ -9,7 +9,7 @@
                 </el-breadcrumb>
             </el-col>
         </el-row>
-        <el-row><el-col>&nbsp;{{role}}</el-col></el-row>
+        <el-row><el-col>&nbsp;</el-col></el-row>
         <el-form
           :model="form"
           label-width="100px">
